@@ -2,11 +2,12 @@ import unittest
 from selenium import webdriver
 from testData.urls import ToursUrl
 
+
 class BaseTest(unittest.TestCase):
     def setUp(self):
         self.inteval_time = 20
 
-        self.driver=webdriver.Chrome("/Users/suxiaoyin/PycharmProjects/untitled1/chromedriver")
+        self.driver = webdriver.Chrome("/Users/suxiaoyin/PycharmProjects/untitled1/chromedriver")
 
         """
         driver_location = "/Users/suxiaoyin/PycharmProjects/DejaCredits/chromedriver"
@@ -18,7 +19,6 @@ class BaseTest(unittest.TestCase):
         self.driver.maximize_window()
         self.driver.implicitly_wait(self.inteval_time)
         self.driver.get(ToursUrl.tours_url)
-
 
     def tearDown(self):
         # self.driver.close()

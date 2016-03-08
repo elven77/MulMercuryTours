@@ -1,37 +1,47 @@
-import unittest
 import StringIO
-import HTMLTestRunner
-from tests import testRegister
-from tests import testSignOn
-from tests import testEditProfile
-import sys
 import unittest
+import HTMLTestRunner
+import sys
+from tests.testRegister import Register
+from tests.testEditProfile import TestEditProfile
+from tests.testSignOn import TestSignOn
+
 
 class Test_HTMLTestRunner(unittest.TestCase):
+
     def test_main(self):
         # Run HTMLTestRunner. Verify the HTML report.
 
         # suite of TestCases
         self.suite = unittest.TestSuite()
         self.suite.addTests([
-            unittest.defaultTestLoader.loadTestsFromTestCase(testRegister),
-            unittest.defaultTestLoader.loadTestsFromTestCase(testSignOn),
-            unittest.defaultTestLoader.loadTestsFromTestCase(testEditProfile)
-            ])
+            unittest.defaultTestLoader.loadTestsFromTestCase(Register),
+            unittest.defaultTestLoader.loadTestsFromTestCase(TestSignOn),
+            unittest.defaultTestLoader.loadTestsFromTestCase(TestEditProfile)
+        ])
 
         # Invoke TestRunner
-        buf = StringIO.StringIO()
-        #runner = unittest.TextTestRunner(buf)       #DEBUG: this is the unittest baseline
+        # buf = StringIO.StringIO()
+        fp = file('my_report.html', 'wb')
+        # runner = unittest.TextTestRunner(buf)       #DEBUG: this is the unittest baseline
         runner = HTMLTestRunner.HTMLTestRunner(
-                    stream=buf,
-                    title='<Demo Test>',
-                    description='This demonstrates the report output by HTMLTestRunner.'
-                    )
+            stream=fp,
+            title='<Demo Test>',
+            description='This demonstrates the report output by HTMLTestRunner.'
+        )
         runner.run(self.suite)
 
 
+##############################################################################
+# Executing this module from the command line
+##############################################################################
+
 if __name__ == "__main__":
-    unittest.main()
+    if len(sys.argv) > 1:
+        argv = sys.argv
+    else:
+        argv = ['runTestSuite.py', 'Test_HTMLTestRunner']
+    unittest.main(argv=argv)
     # Testing HTMLTestRunner with HTMLTestRunner would work. But instead
     # we will use standard library's TextTestRunner to reduce the nesting
     # that may confuse people.

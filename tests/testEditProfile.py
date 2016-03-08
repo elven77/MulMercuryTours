@@ -4,7 +4,7 @@ from pages.loginPages import Login
 from pages.profilePages import EditProfilePages
 
 
-class EditProfile(baseTest.BaseTest):
+class TestEditProfile(baseTest.BaseTest):
     def test_edit_profile(self):
         elemLogin=Login(self.driver)
         elemLogin.login("aaa","aaa")

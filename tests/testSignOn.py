@@ -12,9 +12,9 @@ from pages.logoutPages import LogOutPage
 from testData.passengersInfo import PassengersInfo
 
 
-class SignOn(baseTest.BaseTest):
+class TestSignOn(baseTest.BaseTest):
     def setUp(self):
-        super(SignOn, self).setUp()
+        super(TestSignOn, self).setUp()
 
     def test_signon(self):
         print(time.strftime("Start: "+'%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
